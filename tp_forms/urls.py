@@ -21,8 +21,8 @@ import MyContact
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('contact/',include('MyContact.urls')),
-    path('',include('sendemail.urls'))
+    path('mycontact/',include('MyContact.urls')),
+    path('email/',include('sendemail.urls')),
 ]
 
     

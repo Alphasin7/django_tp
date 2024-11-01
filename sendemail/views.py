@@ -1,8 +1,10 @@
 from django.http import HttpResponse
-from django.core.mail import BadHeaderError, send_mail
+from django.core.mail import BadHeaderError,send_mail
 from django.shortcuts import redirect, render
+
 from sendemail.forms import ContactForm
 
+# Create your views here.
 def contactView(request):
     if request.method == 'GET':
         form = ContactForm()
@@ -18,11 +20,10 @@ def contactView(request):
 
             try:
                 send_mail(subject, message, from_email, email_list)
-                return redirect('success')  # Moved inside the try block
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-
-    return render(request, 'test.html', {'form': form})
+            return redirect('success')
+    return render(request, "email.html", {'form': form})
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
